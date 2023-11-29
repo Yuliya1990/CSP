@@ -27,40 +27,6 @@ def create_chain_csp(n):
     return csp
 
 
-############################################################
-# Problem 1
-
-def create_nqueens_csp(n = 8):
-    """
-    Return an N-Queen problem on the board of size |n| * |n|.
-    You should call csp.add_variable() and csp.add_binary_factor().
-
-    @param n: number of queens, or the size of one dimension of the board.
-
-    @return csp: A CSP problem with correctly configured factor tables
-        such that it can be solved by a weighted CSP solver.
-    """
-    csp = util.CSP()
-    # Problem 1a
-    # BEGIN_YOUR_CODE (our solution is 7 lines of code, but don't worry if you deviate from this)
-    def f(a,b): # a and b are values where value is row + ' ' + column
-        values = a.split(' ')
-        ar = int(values[0])
-        ac = int(values[1])
-        values = b.split(' ')
-        br = int(values[0])
-        bc = int(values[1])
-        if(ar == br or ac == bc or (ar == br and ac == bc) or (abs(ar-br) == abs(ac-bc))):
-            return 0
-        return 1
-
-    for i in range(n):
-        csp.add_variable(i,[str(i) + ' ' + str(j) for j in range(n)]) # example: first queen is in first(zero) row and 0-1 column
-    for i in range(n-1):
-        for j in range(i+1, n):
-            csp.add_binary_factor(i,j,f)
-    # END_YOUR_CODE
-    return csp
 
 # A backtracking algorithm that solves weighted CSP.
 # Usage:
@@ -330,7 +296,6 @@ class BacktrackingSearch():
 
 
 ############################################################
-# Problem 2b
 
 def get_sum_variable(csp, name, variables, maxSum):
     """
@@ -389,7 +354,6 @@ def get_sum_variable(csp, name, variables, maxSum):
 get_or_variable = util.get_or_variable
 
 ############################################################
-# Problem 3
 
 # A class providing methods to generate CSP that can solve the course scheduling
 # problem.
